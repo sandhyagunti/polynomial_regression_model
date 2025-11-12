@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-dataset = pd.read_csv(r"C:\Users\DELL\Downloads\New folder\positions.csv")
+dataset = pd.read_csv(r"D:\Projects\polynomial_regression_model\positions.csv")
 
 x=dataset.iloc[:, 1:2].values
 y=dataset.iloc[:, 2].values
@@ -18,7 +18,7 @@ plt.xlabel('Position Level')
 plt.xlabel('Salary')
 plt.show()
 
-lin_model_pred = lin_reg.predict([[7]])
+lin_model_pred = lin_reg.predict([[6]])
 lin_model_pred
 
 #polynomial regression model
@@ -41,14 +41,41 @@ plt.show()
 poly_model_pred = lin_reg_2.predict(poly_reg.fit_transform([[7]]))
 poly_model_pred
 
+#svr model
+
+from sklearn.svm import SVR
+svr_reg = SVR(kernel="sigmoid",degree=4)
+svr_reg.fit(x,y)
+
+svr_pred = svr_reg.predict([[6]])
+print(svr_pred)
 
 
+# knn model
 
+from sklearn.neighbors import KNeighborsRegressor
+knn_reg =KNeighborsRegressor(n_neighbors=3)
+knn_reg.fit(x,y)
 
+knn_pred = knn_reg.predict([[6]])
+print(knn_pred)
 
+#decission tree
 
+from sklearn.tree import DecisionTreeRegressor
+dt_reg =DecisionTreeRegressor()
+dt_reg.fit(x,y)
 
+dt_pred = dt_reg.predict([[6]])
+print(dt_pred)
 
+#random forest
+from sklearn.ensemble import RandomForestRegressor
+rf_reg = RandomForestRegressor(random_state=0,n_estimators=27)
+rf_reg.fit(x,y)
+
+rf_pred = rf_reg.predict([[6]])
+print(rf_pred)
 
 
 
